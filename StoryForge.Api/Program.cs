@@ -1,4 +1,5 @@
 using System.Threading.RateLimiting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.RateLimiting;
 using StoryForge.Api.Configuration;
 using StoryForge.Api.Models;
@@ -78,6 +79,18 @@ builder.Services.AddHttpClient<IGroqService, GroqService>(client =>
 builder.Services.AddScoped<IStoryService, StoryService>();
 
 var app = builder.Build();
+
+// Render (and most PaaS hosts) terminate TLS at their edge and forward plain HTTP to the
+// container, so trust their proxy's X-Forwarded-* headers to recover the original scheme.
+// The edge proxy's IP isn't fixed/known in advance, so clear the default known-proxy
+// allowlist (this is standard practice for managed PaaS deployments).
+var forwardedHeadersOptions = new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+};
+forwardedHeadersOptions.KnownIPNetworks.Clear();
+forwardedHeadersOptions.KnownProxies.Clear();
+app.UseForwardedHeaders(forwardedHeadersOptions);
 
 app.UseHttpsRedirection();
 

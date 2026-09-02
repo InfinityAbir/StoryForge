@@ -1,13 +1,14 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError, timeout } from 'rxjs';
+import { environment } from '../../environments/environment';
 import { ApiErrorResponse, GenerateStoryRequest, GenerateStoryResponse } from '../models/story.models';
 
 const REQUEST_TIMEOUT_MS = 90_000;
 
 @Injectable({ providedIn: 'root' })
 export class StoryService {
-  private readonly apiUrl = '/api/story/generate';
+  private readonly apiUrl = `${environment.apiBaseUrl}/story/generate`;
 
   constructor(private readonly http: HttpClient) {}
 

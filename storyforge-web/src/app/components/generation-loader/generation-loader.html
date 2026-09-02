@@ -1,0 +1,14 @@
+@if (active()) {
+  <div class="loader-card" role="status" aria-live="polite">
+    <div class="orb">
+      <div class="orb-ring"></div>
+      <div class="orb-core"></div>
+    </div>
+    <p class="loader-message">{{ messages[messageIndex()] }}</p>
+    <div class="shimmer-lines">
+      <span class="shimmer-line"></span>
+      <span class="shimmer-line short"></span>
+      <span class="shimmer-line"></span>
+    </div>
+  </div>
+}

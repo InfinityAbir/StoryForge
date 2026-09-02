@@ -1,0 +1,148 @@
+.dna-card {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  animation: dna-in var(--transition-slow) both;
+}
+
+@keyframes dna-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.dna-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  padding: var(--space-4) var(--space-5);
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.dna-title {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.toggle-icon {
+  color: var(--text-muted);
+  transition: transform var(--transition-fast);
+}
+
+.dna-body {
+  padding: 0 var(--space-5) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  justify-content: center;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 16px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border: 1px solid var(--surface-border-strong);
+  animation: chip-in 380ms ease both;
+  animation-delay: calc(var(--i, 0) * 40ms);
+}
+
+@keyframes chip-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.chip-genre {
+  background: color-mix(in srgb, var(--accent-1) 18%, transparent);
+  color: var(--accent-1);
+}
+
+.chip-tone {
+  background: color-mix(in srgb, var(--accent-2) 16%, transparent);
+  color: var(--accent-2);
+}
+
+.dna-section {
+  text-align: center;
+}
+
+.dna-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+
+.dna-label {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: var(--space-1);
+}
+
+.dna-value {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.flow-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+.flow-step {
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-strong);
+  border: 1px solid var(--surface-border);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.flow-step.structure {
+  color: var(--accent-3);
+  border-color: color-mix(in srgb, var(--accent-3) 30%, var(--surface-border));
+}
+
+.flow-arrow {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 640px) {
+  .dna-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+}

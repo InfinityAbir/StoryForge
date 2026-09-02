@@ -1,0 +1,16 @@
+@if (versions().length > 1) {
+  <nav class="version-nav" aria-label="Story versions">
+    @for (v of versions(); track v.id; let i = $index) {
+      <button
+        type="button"
+        class="version-chip"
+        [class.active]="v.id === activeVersionId()"
+        (click)="select.emit(v.id)"
+        [attr.aria-current]="v.id === activeVersionId() ? 'true' : null"
+        [title]="v.feedback ? 'Feedback: ' + v.feedback : 'Version ' + (i + 1)"
+      >
+        V{{ i + 1 }}
+      </button>
+    }
+  </nav>
+}

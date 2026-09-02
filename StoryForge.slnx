@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="StoryForge.Api.Tests/StoryForge.Api.Tests.csproj" />
+  <Project Path="StoryForge.Api/StoryForge.Api.csproj" />
+</Solution>

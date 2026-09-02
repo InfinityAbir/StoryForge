@@ -1,0 +1,115 @@
+<div class="input-card">
+  <div class="textarea-wrap">
+    <textarea
+      #storyTextarea
+      class="story-textarea"
+      [class.warn]="isTooLong()"
+      [value]="storyText()"
+      (input)="onInput($event)"
+      [disabled]="disabled()"
+      placeholder="Paste your story here..."
+      aria-label="Source story"
+      [attr.maxlength]="maxChars + 500"
+      rows="8"
+    ></textarea>
+
+    <div class="textarea-actions">
+      <input
+        #fileInput
+        type="file"
+        accept=".txt,text/plain"
+        class="file-input-hidden"
+        (change)="onFileSelected($event)"
+        [disabled]="disabled()"
+        aria-hidden="true"
+        tabindex="-1"
+      />
+      <button
+        type="button"
+        class="upload-btn"
+        (click)="triggerFileUpload()"
+        [disabled]="disabled()"
+        aria-label="Upload a .txt file"
+        title="Upload a .txt file"
+      >
+        📄 <span class="upload-btn-label">Upload .txt</span>
+      </button>
+
+      @if (storyText().length > 0) {
+        <button
+          type="button"
+          class="clear-btn"
+          (click)="clear()"
+          [disabled]="disabled()"
+          aria-label="Clear story text"
+        >
+          ✕
+        </button>
+      }
+    </div>
+
+    <div class="char-count" [class.warn]="isTooLong()" [class.hint]="isTooShort()">
+      {{ charCount() | number }} / {{ maxChars | number }}
+    </div>
+  </div>
+
+  @if (uploadError()) {
+    <p class="field-hint error" role="alert">{{ uploadError() }}</p>
+  }
+  @if (isTooShort()) {
+    <p class="field-hint" role="status">
+      Please provide a little more story so StoryForge can understand its narrative DNA. ({{ minChars }} characters minimum)
+    </p>
+  }
+  @if (isTooLong()) {
+    <p class="field-hint error" role="alert">
+      This story is too long for the current limit. Please shorten it.
+    </p>
+  }
+
+  <div class="controls-row">
+    <div class="select-group">
+      <label class="select-label" for="language-select">Language</label>
+      <select
+        id="language-select"
+        class="select-control"
+        [ngModel]="outputLanguage()"
+        (ngModelChange)="outputLanguage.set($event)"
+        [disabled]="disabled()"
+      >
+        <option value="same">Auto Detect</option>
+        <option value="english">English</option>
+        <option value="bangla">বাংলা</option>
+      </select>
+    </div>
+
+    <div class="select-group">
+      <label class="select-label" for="length-select">Length</label>
+      <select
+        id="length-select"
+        class="select-control"
+        [ngModel]="length()"
+        (ngModelChange)="length.set($event)"
+        [disabled]="disabled()"
+      >
+        <option value="short">Short</option>
+        <option value="medium">Medium</option>
+        <option value="long">Long</option>
+      </select>
+    </div>
+
+    <button
+      type="button"
+      class="generate-btn"
+      [disabled]="!canGenerate()"
+      (click)="onGenerateClick()"
+    >
+      @if (disabled()) {
+        <span class="btn-spinner" aria-hidden="true"></span>
+        Creating your story...
+      } @else {
+        ✦ Create New Story
+      }
+    </button>
+  </div>
+</div>

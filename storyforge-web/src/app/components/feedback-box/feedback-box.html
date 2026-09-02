@@ -1,0 +1,46 @@
+@if (open()) {
+  <div class="modal-backdrop" (click)="onBackdropClick()">
+    <div
+      class="modal-panel"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="feedback-title"
+      (click)="$event.stopPropagation()"
+    >
+      <div class="modal-header">
+        <h3 id="feedback-title">💬 Give Feedback</h3>
+        <button type="button" class="close-btn" (click)="onClose()" aria-label="Close feedback panel">✕</button>
+      </div>
+
+      <textarea
+        #feedbackTextarea
+        class="feedback-textarea"
+        [value]="text()"
+        (input)="onInput($event)"
+        [disabled]="disabled()"
+        placeholder="Tell the AI what you want to change..."
+        aria-label="Feedback for the AI"
+        rows="5"
+      ></textarea>
+
+      <div class="feedback-footer">
+        <span class="char-count" [class.warn]="isTooLong()">{{ charCount() }} / {{ maxChars }}</span>
+        <button type="button" class="submit-btn" [disabled]="!canSubmit()" (click)="onSubmit()">
+          @if (disabled()) {
+            <span class="btn-spinner" aria-hidden="true"></span>
+            Applying feedback...
+          } @else {
+            ✦ Generate Improved Story
+          }
+        </button>
+      </div>
+
+      <div class="examples">
+        <span class="examples-label">Try:</span>
+        <button type="button" class="example-chip" (click)="text.set('Make the ending more surprising.')" [disabled]="disabled()">Make the ending more surprising</button>
+        <button type="button" class="example-chip" (click)="text.set('Make it darker.')" [disabled]="disabled()">Make it darker</button>
+        <button type="button" class="example-chip" (click)="text.set('Make the pacing faster.')" [disabled]="disabled()">Faster pacing</button>
+      </div>
+    </div>
+  </div>
+}

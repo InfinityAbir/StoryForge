@@ -1,0 +1,70 @@
+<div class="page-bg" aria-hidden="true"></div>
+
+<div class="page">
+  <header class="app-header">
+    <span class="brand">✦ STORYFORGE</span>
+    <button
+      type="button"
+      class="theme-toggle"
+      (click)="themeService.toggle()"
+      [attr.aria-label]="themeService.theme() === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'"
+    >
+      {{ themeService.theme() === 'dark' ? '☀️' : '🌙' }}
+    </button>
+  </header>
+
+  <section class="hero">
+    <h1 class="hero-title">Turn a story into a new universe.</h1>
+    <p class="hero-subtitle">Same story DNA. A completely different story.</p>
+  </section>
+
+  <main class="workspace">
+    <app-story-input
+      [(storyText)]="sourceStory"
+      [(outputLanguage)]="outputLanguage"
+      [(length)]="length"
+      [disabled]="isGenerating()"
+      (generate)="onGenerate()"
+    />
+
+    @if (error()) {
+      <div class="error-banner" role="alert">
+        <span>{{ error() }}</span>
+        <button type="button" class="error-dismiss" (click)="dismissError()" aria-label="Dismiss error">✕</button>
+      </div>
+    }
+
+    @if (isGenerating()) {
+      <app-generation-loader [active]="true" />
+    } @else if (hasResult()) {
+      <div class="result-section">
+        <app-version-history
+          [versions]="versions()"
+          [activeVersionId]="activeVersionId()"
+          (select)="onSelectVersion($event)"
+        />
+
+        <app-story-dna [dna]="activeVersion()!.storyDna" />
+
+        <app-story-result
+          [title]="activeVersion()!.title"
+          [story]="activeVersion()!.story"
+          [disabled]="isGenerating()"
+          (regenerate)="onRegenerate()"
+          (openFeedback)="feedbackOpen.set(true)"
+        />
+      </div>
+    }
+  </main>
+
+  <footer class="app-footer">
+    <p>StoryForge processes your story to generate a new one and does not store it on the server.</p>
+  </footer>
+</div>
+
+<app-feedback-box
+  [open]="feedbackOpen()"
+  [disabled]="isGenerating()"
+  (submitFeedback)="onSubmitFeedback($event)"
+  (close)="onCloseFeedback()"
+/>

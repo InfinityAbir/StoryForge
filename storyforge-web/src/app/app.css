@@ -1,0 +1,166 @@
+:host {
+  display: block;
+}
+
+.page-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 15% 20%, color-mix(in srgb, var(--accent-1) 22%, transparent), transparent 45%),
+    radial-gradient(circle at 85% 15%, color-mix(in srgb, var(--accent-2) 18%, transparent), transparent 50%),
+    radial-gradient(circle at 50% 90%, color-mix(in srgb, var(--accent-3) 16%, transparent), transparent 55%),
+    var(--bg-0);
+  background-size: 200% 200%, 200% 200%, 200% 200%, 100% 100%;
+  animation: bg-drift 22s ease-in-out infinite alternate;
+}
+
+@keyframes bg-drift {
+  0% {
+    background-position: 0% 0%, 100% 0%, 50% 100%, 0 0;
+  }
+  100% {
+    background-position: 20% 30%, 70% 40%, 40% 70%, 0 0;
+  }
+}
+
+.page {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: var(--space-5) var(--space-5) var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  min-height: 100%;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--space-3);
+}
+
+.brand {
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.theme-toggle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--surface-border-strong);
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 1.05rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-fast), background var(--transition-fast);
+}
+
+.theme-toggle:hover {
+  transform: rotate(14deg) scale(1.05);
+  background: var(--surface-strong);
+}
+
+.hero {
+  text-align: center;
+  padding: var(--space-6) 0 var(--space-3);
+  animation: hero-in var(--transition-slow) both;
+}
+
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-title {
+  font-family: var(--font-story);
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.25;
+}
+
+.hero-subtitle {
+  margin-top: var(--space-3);
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+}
+
+.workspace {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  max-width: 880px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.error-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  background: color-mix(in srgb, var(--danger) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--danger) 40%, transparent);
+  color: var(--danger);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  animation: fade-up var(--transition-base) both;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.error-dismiss {
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.result-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.app-footer {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin-top: auto;
+  padding-top: var(--space-6);
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: var(--space-4) var(--space-3) var(--space-7);
+    gap: var(--space-5);
+  }
+
+  .hero {
+    padding: var(--space-4) 0 var(--space-2);
+  }
+}

@@ -1,0 +1,28 @@
+# ---- .NET ----
+bin/
+obj/
+*.user
+appsettings.Local.json
+appsettings.*.local.json
+
+# ---- Angular / Node ----
+storyforge-web/node_modules/
+storyforge-web/dist/
+storyforge-web/.angular/
+storyforge-web/npm-debug.log*
+
+# ---- Editors / OS ----
+.vs/
+.vscode/
+.idea/
+.claude/
+.DS_Store
+Thumbs.db
+
+# ---- Secrets (never commit) ----
+.env
+*.pfx
+*.key
+
+# ---- Local test scratch files ----
+TestStory.txt

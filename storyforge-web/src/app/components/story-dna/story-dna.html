@@ -1,0 +1,63 @@
+<section class="dna-card" [class.collapsed]="!expanded()">
+  <button type="button" class="dna-header" (click)="toggle()" [attr.aria-expanded]="expanded()">
+    <span class="dna-title">🧬 Story DNA</span>
+    <span class="toggle-icon" aria-hidden="true">{{ expanded() ? '▾' : '▸' }}</span>
+  </button>
+
+  @if (expanded()) {
+    <div class="dna-body">
+      <div class="chip-row">
+        @for (g of dna().genre; track g) {
+          <span class="chip chip-genre">{{ g }}</span>
+        }
+        @for (t of dna().tone; track t) {
+          <span class="chip chip-tone">{{ t }}</span>
+        }
+      </div>
+
+      <div class="dna-section">
+        <span class="dna-label">Theme</span>
+        <p class="dna-value">{{ dna().themes.join(' • ') }}</p>
+      </div>
+
+      <div class="dna-grid">
+        <div class="dna-section">
+          <span class="dna-label">Protagonist</span>
+          <p class="dna-value">{{ dna().protagonistArchetype }}</p>
+        </div>
+        <div class="dna-section">
+          <span class="dna-label">Central Conflict</span>
+          <p class="dna-value">{{ dna().centralConflict }}</p>
+        </div>
+        <div class="dna-section">
+          <span class="dna-label">Ending</span>
+          <p class="dna-value">{{ dna().endingType }}</p>
+        </div>
+      </div>
+
+      <div class="dna-section">
+        <span class="dna-label">Emotional Arc</span>
+        <div class="flow-row">
+          @for (step of dna().emotionalArc; track $index; let last = $last) {
+            <span class="flow-step">{{ step }}</span>
+            @if (!last) {
+              <span class="flow-arrow" aria-hidden="true">→</span>
+            }
+          }
+        </div>
+      </div>
+
+      <div class="dna-section">
+        <span class="dna-label">Story Structure</span>
+        <div class="flow-row">
+          @for (step of dna().structure; track $index; let last = $last) {
+            <span class="flow-step structure">{{ step }}</span>
+            @if (!last) {
+              <span class="flow-arrow" aria-hidden="true">→</span>
+            }
+          }
+        </div>
+      </div>
+    </div>
+  }
+</section>

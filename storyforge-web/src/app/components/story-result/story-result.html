@@ -1,0 +1,25 @@
+<article class="result-card">
+  <p class="eyebrow">✦ Your New Story</p>
+  <h2 class="story-title">{{ title() }}</h2>
+  <div class="divider" aria-hidden="true"></div>
+
+  <div class="story-body">
+    @for (paragraph of paragraphs(); track $index) {
+      <p class="story-paragraph">{{ paragraph }}</p>
+    }
+  </div>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <div class="action-row">
+    <button type="button" class="action-btn" (click)="copy()" [class.confirmed]="copied()">
+      {{ copied() ? '✓ Copied' : 'Copy' }}
+    </button>
+    <button type="button" class="action-btn" (click)="regenerate.emit()" [disabled]="disabled()">
+      ↻ Regenerate
+    </button>
+    <button type="button" class="action-btn primary" (click)="openFeedback.emit()" [disabled]="disabled()">
+      💬 Give Feedback
+    </button>
+  </div>
+</article>

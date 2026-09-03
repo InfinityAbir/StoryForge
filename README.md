@@ -1,5 +1,7 @@
 # StoryForge
 
+**Live demo: [storyforgefrontend.onrender.com](https://storyforgefrontend.onrender.com/)**
+
 StoryForge analyzes a story's narrative DNA (genre, themes, tone, archetypes, conflict,
 emotional arc, structure, ending) and generates a new, independently written story
 inspired by that DNA — not a rewrite, paraphrase, or translation.
@@ -10,6 +12,32 @@ Angular  ->  ASP.NET Core (.NET 10)  ->  Groq API
 
 No database, no authentication, no server-side story storage. See `StoryForge_PRD.md`
 for the full product spec this implementation follows.
+
+## Why this exists
+
+Most "AI story tools" either paraphrase your input or write something generic and
+unrelated. StoryForge does neither — it extracts the *shape* of a story (genre, tone,
+character archetypes, conflict, emotional arc, structure, ending) and hands that DNA to
+the model as the creative brief, discarding the original wording entirely. The result is
+a new story that feels related to the source without being a disguised copy of it — a
+way to explore "what if this same emotional arc played out differently."
+
+## When to use it
+
+- You have an idea or an old story and want to see it reimagined with new characters,
+  settings, and events, but the same narrative core.
+- You want quick creative variations of a plot to pick the direction you like best.
+- You want to iterate on a generated story with plain-language feedback
+  ("make the ending darker", "make the protagonist morally grey") instead of rewriting
+  it by hand.
+- You write in Bangla or English and want the output in either language, independent of
+  the input language.
+
+## Screenshots
+
+| Home | English story | Bangla story |
+|---|---|---|
+| ![Home](images/home.png) | ![English story](images/engstory.png) | ![Bangla story](images/banglastory.png) |
 
 ## Project layout
 

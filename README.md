@@ -1,6 +1,6 @@
 # StoryForge
 
-**Live demo: [storyforgefrontend.onrender.com](https://storyforgefrontend.onrender.com/)**
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Visit_Site-2ea44f?style=for-the-badge&logo=googlechrome&logoColor=white)](https://storyforgefrontend.onrender.com/)
 
 StoryForge analyzes a story's narrative DNA (genre, themes, tone, archetypes, conflict,
 emotional arc, structure, ending) and generates a new, independently written story
